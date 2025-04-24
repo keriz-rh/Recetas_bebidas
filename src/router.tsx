@@ -1,25 +1,17 @@
-import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Layout from './layouts/Layout'
-const IndexPage = lazy(() => import('./views/IndexPage'))
-const FavoritesPage = lazy(() => import('./views/FavoritesPage'))
+import { BrowserRouter, Routes, Route } from "react-router-dom";import MainLayout from "./layouts/MainLayout";
+import IndexPage from "./views/Index";
+import FavoritesPage from "./views/Favorites";
+import GenerateAI from "./views/GenerateAI";
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
         <Routes>
-           <Route element={<Layout />}>
-              <Route path='/' element={
-                  <Suspense fallback="Cargando...">
-                      <IndexPage />
-                  </Suspense>
-              } index />
-              <Route path='/favoritos' element={
-                <Suspense fallback="Cargando...">
-                    <FavoritesPage />
-                </Suspense>
-              } />
-           </Route>
+            <Route element={<MainLayout />}>
+                <Route path="/" element={<IndexPage />} index /> 
+                <Route path="/favorites" element={<FavoritesPage />} /> 
+                <Route path="/generate" element={<GenerateAI />} /> 
+            </Route>
         </Routes>
     </BrowserRouter>
   )
